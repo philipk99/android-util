@@ -6,7 +6,7 @@ plugins {
 val composeVersion = rootProject.extra.get("compose_version") as String
 
 android {
-    namespace = "de.klostermeier.recipes"
+    namespace = "de.klostermeier.androidutil"
     compileSdk = rootProject.extra.get("compile_sdk") as Int
 
     defaultConfig {
@@ -58,13 +58,5 @@ android {
 }
 
 dependencies {
-    implementation("com.google.android.material:material:1.6.1")
-
-    // Core
-    implementation("androidx.core:core-ktx:1.8.0")
-
-    // Compose
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+    implementation(project(mapOf("path" to ":androidutil")))
 }
