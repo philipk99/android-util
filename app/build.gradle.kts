@@ -53,10 +53,32 @@ android {
     packagingOptions {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
 
 dependencies {
     implementation(project(mapOf("path" to ":androidutil")))
+
+    implementation("com.google.android.material:material:1.6.1")
+
+    // Core
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.activity:activity-compose:1.4.0")
+
+    // Lifecycle
+    val lifecycleVersion = "2.5.0-rc01"
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
+
+    // Compose
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+    debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
+
+    // Accompanist
+    val accompanistVersion = "0.24.10-beta"
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 }
