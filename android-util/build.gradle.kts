@@ -65,11 +65,11 @@ afterEvaluate {
     publishing {
         publications {
             register(name = "release", MavenPublication::class) {
-                from(components["release"])
+                from(components["java"])
 
                 groupId = "com.github.philipk99"
                 artifactId = "android-util"
-                version = "0.1.1"
+                version = "0.1.0"
             }
         }
     }
