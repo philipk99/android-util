@@ -52,14 +52,13 @@ android {
 
     packagingOptions {
         resources {
-            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":androidutil")))
+    implementation(project(mapOf("path" to ":android-util")))
 
     implementation("com.google.android.material:material:1.6.1")
 
