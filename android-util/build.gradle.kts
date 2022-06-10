@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("maven-publish")
 }
 
 val composeVersion = rootProject.extra.get("compose_version") as String
@@ -60,4 +61,18 @@ dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components.getByName("release"))
+
+                groupId = "com.github.philipk99"
+                artifactId = "android-util"
+                version = "0.1.1"
+            }
+        }
+    }
 }
