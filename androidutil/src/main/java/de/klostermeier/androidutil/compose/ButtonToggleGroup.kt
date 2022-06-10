@@ -1,5 +1,6 @@
 package de.klostermeier.androidutil.compose
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import de.klostermeier.androidutil.R
 import de.klostermeier.androidutil.compose.ButtonToggleGroup.NO_ITEM_SELECTED
 import de.klostermeier.androidutil.compose.util.UiText
 
@@ -24,9 +26,27 @@ fun ButtonToggleGroup(
     modifier: Modifier = Modifier,
     items: List<UiText>,
     onIndexChange: (Int) -> Unit,
+    defaultItem: Int = DropDownSpinner.NO_ITEM_SELECTED,
+    cornerRadius: Dp = 8.dp
+) = ButtonToggleGroup(
+    modifier = modifier,
+    items = items,
+    onIndexChange = onIndexChange,
+    defaultItem = defaultItem,
+    itemToString = { asString() },
+    cornerRadius = cornerRadius
+)
+
+@Composable
+fun <E> ButtonToggleGroup(
+    modifier: Modifier = Modifier,
+    items: List<E>,
+    onIndexChange: (Int) -> Unit,
+    defaultItem: Int = DropDownSpinner.NO_ITEM_SELECTED,
+    itemToString: @Composable E.() -> String = { toString() },
     cornerRadius: Dp = 8.dp
 ) {
-    var selectedIndex by remember { mutableStateOf(NO_ITEM_SELECTED) }
+    var selectedIndex by remember { mutableStateOf(defaultItem) }
 
     Row(
         modifier = modifier
@@ -87,7 +107,7 @@ fun ButtonToggleGroup(
                 }
             ) {
                 Text(
-                    text = item.asString(),
+                    text = item.itemToString(),
                     color = if (selectedIndex == index) {
                         MaterialTheme.colors.primary
                     } else {

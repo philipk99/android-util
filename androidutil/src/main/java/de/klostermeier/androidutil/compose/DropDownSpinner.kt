@@ -30,6 +30,23 @@ fun DropDownSpinner(
     onItemSelected: (Int) -> Unit,
     defaultItem: Int = NO_ITEM_SELECTED,
     @StringRes defaultText: Int = R.string.drop_down_spinner_default
+) = DropDownSpinner(
+    modifier = modifier,
+    items = items,
+    onItemSelected = onItemSelected,
+    defaultItem = defaultItem,
+    defaultText = defaultText,
+    itemToString = { asString() }
+)
+
+@Composable
+fun <E> DropDownSpinner(
+    modifier: Modifier = Modifier,
+    items: List<E>,
+    onItemSelected: (Int) -> Unit,
+    defaultItem: Int = NO_ITEM_SELECTED,
+    @StringRes defaultText: Int = R.string.drop_down_spinner_default,
+    itemToString: @Composable E.() -> String = { toString() },
 ) {
     var selectedIndex by remember { mutableStateOf(defaultItem) }
     var isOpen by remember { mutableStateOf(false) }
@@ -51,7 +68,7 @@ fun DropDownSpinner(
             )
         } else {
             Text(
-                text = items[selectedIndex].asString(),
+                text = items[selectedIndex].itemToString(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 32.dp, bottom = 3.dp),
@@ -73,7 +90,7 @@ fun DropDownSpinner(
                         selectedIndex = index.also(onItemSelected)
                     }
                 ) {
-                    Text(text = item.asString())
+                    Text(text = item.itemToString())
                 }
             }
         }

@@ -5,8 +5,33 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import de.klostermeier.androidutil.compose.util.UiText
+
+@Composable
+fun ErrorText(
+    error: String?
+) = error?.let {
+    Text(
+        text = it,
+        color = MaterialTheme.colors.error,
+        style = MaterialTheme.typography.caption,
+        modifier = Modifier.padding(start = 16.dp)
+    )
+}
+
+@Composable
+fun ErrorText(
+    error: AnnotatedString?
+) = error?.let {
+    Text(
+        text = it,
+        color = MaterialTheme.colors.error,
+        style = MaterialTheme.typography.caption,
+        modifier = Modifier.padding(start = 16.dp)
+    )
+}
 
 @Composable
 fun ErrorText(
