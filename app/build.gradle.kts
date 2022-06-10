@@ -6,11 +6,11 @@ plugins {
 val composeVersion = rootProject.extra.get("compose_version") as String
 
 android {
-    namespace = "de.klostermeier.androidutil"
+    namespace = "de.klostermeier.androidutil_sample"
     compileSdk = rootProject.extra.get("compile_sdk") as Int
 
     defaultConfig {
-        applicationId = "de.klostermeier.androidutil"
+        applicationId = "de.klostermeier.android_util"
         minSdk = rootProject.extra.get("min_sdk") as Int
         targetSdk = rootProject.extra.get("target_sdk") as Int
         versionCode = 1

@@ -13,8 +13,6 @@ android {
     defaultConfig {
         minSdk = rootProject.extra.get("min_sdk") as Int
         targetSdk = rootProject.extra.get("target_sdk") as Int
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -66,8 +64,8 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            create<MavenPublication>("release") {
-                from(components.getByName("release"))
+            register(name = "release", MavenPublication::class) {
+                from(components["release"])
 
                 groupId = "com.github.philipk99"
                 artifactId = "android-util"

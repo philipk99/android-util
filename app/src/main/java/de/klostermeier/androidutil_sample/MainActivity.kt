@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil
+package de.klostermeier.androidutil_sample
 
 import android.content.Context
 import android.os.Bundle
@@ -19,7 +19,7 @@ import de.klostermeier.androidutil.compose.ButtonToggleGroup
 import de.klostermeier.androidutil.compose.DropDownSpinner
 import de.klostermeier.androidutil.compose.ErrorText
 import de.klostermeier.androidutil.compose.util.UiText
-import de.klostermeier.androidutil.ui.theme.AndroidUtilTheme
+import de.klostermeier.androidutil_sample.ui.theme.AndroidUtilTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

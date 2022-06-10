@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.ui.theme
+package de.klostermeier.androidutil_sample.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
