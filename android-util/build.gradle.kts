@@ -64,7 +64,7 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            register(name = "release", MavenPublication::class) {
+            register(name = "maven", MavenPublication::class) {
                 from(components["java"])
 
                 groupId = "com.github.philipk99"
