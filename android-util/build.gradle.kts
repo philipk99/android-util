@@ -64,8 +64,8 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            register(name = "maven", MavenPublication::class) {
-                from(components["java"])
+            create<MavenPublication>("release") {
+                from(components["release"])
 
                 groupId = "com.github.philipk99"
                 artifactId = "android-util"
