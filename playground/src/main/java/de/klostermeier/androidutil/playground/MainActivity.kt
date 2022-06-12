@@ -19,7 +19,7 @@ import de.klostermeier.androidutil.compose.ButtonToggleGroup
 import de.klostermeier.androidutil.compose.DropDownSpinner
 import de.klostermeier.androidutil.compose.ErrorText
 import de.klostermeier.androidutil.compose.util.UiText
-import de.klostermeier.androidutil.playground.theme.ui.AndroidUtilTheme
+import de.klostermeier.androidutil.playground.ui.theme.AndroidUtilTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
