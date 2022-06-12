@@ -26,7 +26,7 @@ fun ButtonToggleGroup(
     modifier: Modifier = Modifier,
     items: List<UiText>,
     onIndexChange: (Int) -> Unit,
-    defaultItem: Int = DropDownSpinner.NO_ITEM_SELECTED,
+    defaultItem: Int = NO_ITEM_SELECTED,
     cornerRadius: Dp = 8.dp
 ) = ButtonToggleGroup(
     modifier = modifier,
@@ -42,7 +42,7 @@ fun <E> ButtonToggleGroup(
     modifier: Modifier = Modifier,
     items: List<E>,
     onIndexChange: (Int) -> Unit,
-    defaultItem: Int = DropDownSpinner.NO_ITEM_SELECTED,
+    defaultItem: Int = NO_ITEM_SELECTED,
     itemToString: @Composable E.() -> String = { toString() },
     cornerRadius: Dp = 8.dp
 ) {
