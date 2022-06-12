@@ -6,7 +6,7 @@ plugins {
 val composeVersion = rootProject.extra.get("compose_version") as String
 
 android {
-    namespace = "de.klostermeier.androidutil_sample"
+    namespace = "de.klostermeier.androidutil.playground"
     compileSdk = rootProject.extra.get("compile_sdk") as Int
 
     defaultConfig {

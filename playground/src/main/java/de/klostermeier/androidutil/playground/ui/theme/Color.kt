@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil_sample.ui.theme
+package de.klostermeier.androidutil.playground.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
