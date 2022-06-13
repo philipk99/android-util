@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import de.klostermeier.androidutil.R
 import de.klostermeier.androidutil.compose.DropDownSpinner.NO_ITEM_SELECTED
@@ -34,6 +35,7 @@ fun DropDownSpinner(
     leadingIcon: ImageVector? = null,
     trailingIcon: ImageVector? = null,
     iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+    cornerRadius: Dp = 8.dp
 ) = DropDownSpinner(
     modifier = modifier,
     items = items,
@@ -44,6 +46,7 @@ fun DropDownSpinner(
     leadingIcon = leadingIcon,
     trailingIcon = trailingIcon,
     iconTint = iconTint,
+    cornerRadius = cornerRadius
 )
 
 @Composable
@@ -57,13 +60,14 @@ fun <E> DropDownSpinner(
     leadingIcon: ImageVector? = null,
     trailingIcon: ImageVector? = null,
     iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+    cornerRadius: Dp = 8.dp
 ) {
     var selectedIndex by remember { mutableStateOf(defaultItem) }
     var isOpen by remember { mutableStateOf(false) }
 
     Box(
         modifier
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(cornerRadius))
             .background(MaterialTheme.colors.surface)
             .height(48.dp),
         contentAlignment = Alignment.CenterStart
