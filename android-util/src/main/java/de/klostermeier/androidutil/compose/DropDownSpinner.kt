@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import de.klostermeier.androidutil.R
@@ -29,14 +30,20 @@ fun DropDownSpinner(
     items: List<UiText>,
     onItemSelected: (Int) -> Unit,
     defaultItem: Int = NO_ITEM_SELECTED,
-    @StringRes defaultText: Int = R.string.drop_down_spinner_default
+    @StringRes defaultText: Int = R.string.drop_down_spinner_default,
+    leadingIcon: ImageVector? = null,
+    trailingIcon: ImageVector? = null,
+    iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
 ) = DropDownSpinner(
     modifier = modifier,
     items = items,
     onItemSelected = onItemSelected,
     defaultItem = defaultItem,
     defaultText = defaultText,
-    itemToString = { asString() }
+    itemToString = { asString() },
+    leadingIcon = leadingIcon,
+    trailingIcon = trailingIcon,
+    iconTint = iconTint,
 )
 
 @Composable
@@ -47,6 +54,9 @@ fun <E> DropDownSpinner(
     defaultItem: Int = NO_ITEM_SELECTED,
     @StringRes defaultText: Int = R.string.drop_down_spinner_default,
     itemToString: @Composable E.() -> String = { toString() },
+    leadingIcon: ImageVector? = null,
+    trailingIcon: ImageVector? = null,
+    iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
 ) {
     var selectedIndex by remember { mutableStateOf(defaultItem) }
     var isOpen by remember { mutableStateOf(false) }
@@ -58,22 +68,26 @@ fun <E> DropDownSpinner(
             .height(48.dp),
         contentAlignment = Alignment.CenterStart
     ) {
-        if (selectedIndex == NO_ITEM_SELECTED) {
-            Text(
-                text = stringResource(id = defaultText),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 3.dp),
-                color = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium)
-            )
-        } else {
-            Text(
-                text = items[selectedIndex].itemToString(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 32.dp, bottom = 3.dp),
-                color = MaterialTheme.colors.onSurface
-            )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, bottom = 3.dp)
+        ) {
+            if (selectedIndex == NO_ITEM_SELECTED) {
+                Text(
+                    text = stringResource(id = defaultText),
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium)
+                )
+            } else {
+                DropDownSpinnerItem(
+                    text = items[selectedIndex].itemToString(),
+                    textColor = MaterialTheme.colors.onSurface,
+                    leadingIcon = leadingIcon,
+                    trailingIcon = trailingIcon,
+                    iconTint = iconTint
+                )
+            }
         }
 
         DropdownMenu(
@@ -90,7 +104,12 @@ fun <E> DropDownSpinner(
                         selectedIndex = index.also(onItemSelected)
                     }
                 ) {
-                    Text(text = item.itemToString())
+                    DropDownSpinnerItem(
+                        text = item.itemToString(),
+                        leadingIcon = leadingIcon,
+                        trailingIcon = trailingIcon,
+                        iconTint = iconTint
+                    )
                 }
             }
         }
@@ -111,6 +130,40 @@ fun <E> DropDownSpinner(
                 .clickable(
                     onClick = { isOpen = true }
                 )
+        )
+    }
+}
+
+@Composable
+private fun DropDownSpinnerItem(
+    text: String,
+    modifier: Modifier = Modifier,
+    textColor: Color = Color.Unspecified,
+    leadingIcon: ImageVector?,
+    trailingIcon: ImageVector?,
+    iconTint: Color
+) {
+    leadingIcon?.let {
+        Icon(
+            imageVector = it,
+            contentDescription = "DropDownSpinner_leadingIcon",
+            tint = iconTint,
+            modifier = Modifier.padding(end = 4.dp)
+        )
+    }
+
+    Text(
+        text = text,
+        modifier = modifier,
+        color = textColor
+    )
+
+    trailingIcon?.let {
+        Icon(
+            imageVector = it,
+            contentDescription = "DropDownSpinner_trailingIcon",
+            tint = iconTint,
+            modifier = Modifier.padding(start = 4.dp)
         )
     }
 }

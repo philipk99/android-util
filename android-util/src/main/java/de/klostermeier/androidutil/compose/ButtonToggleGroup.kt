@@ -1,6 +1,5 @@
 package de.klostermeier.androidutil.compose
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,10 +9,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import de.klostermeier.androidutil.R
 import de.klostermeier.androidutil.compose.ButtonToggleGroup.NO_ITEM_SELECTED
 import de.klostermeier.androidutil.compose.util.UiText
 
@@ -27,6 +27,9 @@ fun ButtonToggleGroup(
     items: List<UiText>,
     onIndexChange: (Int) -> Unit,
     defaultItem: Int = NO_ITEM_SELECTED,
+    leadingIcon: ImageVector? = null,
+    trailingIcon: ImageVector? = null,
+    iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
     cornerRadius: Dp = 8.dp
 ) = ButtonToggleGroup(
     modifier = modifier,
@@ -34,6 +37,9 @@ fun ButtonToggleGroup(
     onIndexChange = onIndexChange,
     defaultItem = defaultItem,
     itemToString = { asString() },
+    leadingIcon = leadingIcon,
+    trailingIcon = trailingIcon,
+    iconTint = iconTint,
     cornerRadius = cornerRadius
 )
 
@@ -44,6 +50,9 @@ fun <E> ButtonToggleGroup(
     onIndexChange: (Int) -> Unit,
     defaultItem: Int = NO_ITEM_SELECTED,
     itemToString: @Composable E.() -> String = { toString() },
+    leadingIcon: ImageVector? = null,
+    trailingIcon: ImageVector? = null,
+    iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
     cornerRadius: Dp = 8.dp
 ) {
     var selectedIndex by remember { mutableStateOf(defaultItem) }
@@ -106,6 +115,14 @@ fun <E> ButtonToggleGroup(
                     ButtonDefaults.outlinedButtonColors()
                 }
             ) {
+                leadingIcon?.let {
+                    Icon(
+                        imageVector = it,
+                        contentDescription = "ButtonToggleGroup_leadingIcon",
+                        tint = iconTint
+                    )
+                }
+
                 Text(
                     text = item.itemToString(),
                     color = if (selectedIndex == index) {
@@ -113,9 +130,17 @@ fun <E> ButtonToggleGroup(
                     } else {
                         MaterialTheme.colors.onSurface.copy(ContentAlpha.medium)
                     },
-                    modifier = Modifier.padding(horizontal = 8.dp),
+                    modifier = Modifier.padding(horizontal = 4.dp),
                     maxLines = 1
                 )
+
+                trailingIcon?.let {
+                    Icon(
+                        imageVector = it,
+                        contentDescription = "ButtonToggleGroup_trailingIcon",
+                        tint = iconTint
+                    )
+                }
             }
         }
 
