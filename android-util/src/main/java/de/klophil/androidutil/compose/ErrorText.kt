@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.compose
+package de.klophil.androidutil.compose
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
-import de.klostermeier.androidutil.compose.util.UiText
+import de.klophil.androidutil.compose.util.UiText
 
 @Composable
 fun ErrorText(

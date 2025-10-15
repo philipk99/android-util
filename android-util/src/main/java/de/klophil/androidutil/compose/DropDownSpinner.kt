@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.compose
+package de.klophil.androidutil.compose
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -20,7 +20,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuDefaults
-import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,9 +35,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import de.klostermeier.androidutil.R
-import de.klostermeier.androidutil.compose.DropDownSpinner.NO_ITEM_SELECTED
-import de.klostermeier.androidutil.compose.util.UiText
+import de.klophil.androidutil.R
+import de.klophil.androidutil.compose.DropDownSpinner.NO_ITEM_SELECTED
+import de.klophil.androidutil.compose.util.UiText
 
 object DropDownSpinner {
     const val NO_ITEM_SELECTED = -1

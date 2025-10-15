@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.compose.util
+package de.klophil.androidutil.compose.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.playground.ui.theme
+package de.klophil.androidutil.playground.ui.theme
 
 import androidx.compose.material3.Typography
 

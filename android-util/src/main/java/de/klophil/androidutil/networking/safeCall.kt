@@ -1,6 +1,6 @@
-package de.klostermeier.androidutil.networking
+package de.klophil.androidutil.networking
 
-import de.klostermeier.androidutil.domain.Result
+import de.klophil.androidutil.domain.Result
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.coroutines.ensureActive

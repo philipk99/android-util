@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.compose
+package de.klophil.androidutil.compose
 
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
@@ -8,7 +8,6 @@ import androidx.compose.material.icons.automirrored.rounded.StarHalf
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.StarOutline
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.data
+package de.klophil.androidutil.data
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties

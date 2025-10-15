@@ -8,10 +8,10 @@ plugins {
 }
 
 android {
-    namespace = "de.klostermeier.androidutil.playground"
+    namespace = "de.klophil.androidutil.playground"
 
     defaultConfig {
-        applicationId = "de.klostermeier.android_util"
+        applicationId = "de.klophil.android_util"
         versionCode = 1
         versionName = "1.0"
 

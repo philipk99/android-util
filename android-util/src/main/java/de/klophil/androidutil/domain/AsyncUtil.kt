@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.domain
+package de.klophil.androidutil.domain
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async

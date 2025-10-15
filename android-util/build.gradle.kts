@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "de.klostermeier.androidutil"
+    namespace = "de.klophil.androidutil"
 
     buildTypes {
         release {

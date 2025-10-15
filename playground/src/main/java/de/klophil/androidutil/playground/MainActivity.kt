@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package de.klostermeier.androidutil.playground
+package de.klophil.androidutil.playground
 
 import android.content.Context
 import android.os.Bundle
@@ -30,11 +30,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.datastore.dataStore
-import de.klostermeier.androidutil.compose.DropDownSpinner
-import de.klostermeier.androidutil.compose.ErrorText
-import de.klostermeier.androidutil.compose.util.UiText
-import de.klostermeier.androidutil.data.Crypto
-import de.klostermeier.androidutil.playground.ui.theme.AndroidUtilTheme
+import de.klophil.androidutil.compose.DropDownSpinner
+import de.klophil.androidutil.compose.ErrorText
+import de.klophil.androidutil.compose.util.UiText
+import de.klophil.androidutil.data.Crypto
+import de.klophil.androidutil.playground.ui.theme.AndroidUtilTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 

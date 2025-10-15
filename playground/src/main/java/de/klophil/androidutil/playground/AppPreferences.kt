@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.playground
+package de.klophil.androidutil.playground
 
 import kotlinx.serialization.Serializable
 

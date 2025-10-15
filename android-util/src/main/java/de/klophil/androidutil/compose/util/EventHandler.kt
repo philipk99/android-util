@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.compose.util
+package de.klophil.androidutil.compose.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

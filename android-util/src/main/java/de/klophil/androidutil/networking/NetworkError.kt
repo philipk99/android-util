@@ -1,6 +1,6 @@
-package de.klostermeier.androidutil.networking
+package de.klophil.androidutil.networking
 
-import de.klostermeier.androidutil.domain.Error
+import de.klophil.androidutil.domain.Error
 
 enum class NetworkError: Error {
     REQUEST_TIMEOUT,

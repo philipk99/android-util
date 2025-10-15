@@ -1,4 +1,4 @@
-package de.klostermeier.androidutil.domain
+package de.klophil.androidutil.domain
 
 typealias DomainError = Error
 
