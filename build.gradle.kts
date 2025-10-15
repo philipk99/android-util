@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     // Jetpack Compose
     alias(libs.plugins.kotlin.compose) apply false
+    // Kotlinx Serialization
+    alias(libs.plugins.kotlin.serialization) apply false
 }
 
 //tasks {

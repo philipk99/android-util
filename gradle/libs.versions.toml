@@ -2,14 +2,21 @@
 # Android Gradle Plugin and Kotlin
 agp = "8.13.0"
 kotlin = "2.2.20"
+kotlinxSerialization = "1.9.0"
 
 # AndroidX
 coreKtx = "1.17.0"
 activityCompose = "1.11.0"
-lifecycleRuntimeKtx = "2.10.0-alpha04"
+lifecycleRuntimeKtx = "2.10.0-alpha05"
 
 # Jetpack Compose
-composeBom = "2025.09.01"
+composeBom = "2025.10.00"
+
+# Datastore
+datastore = "1.1.7"
+
+# Ktor (Client)
+ktor = "3.3.1"
 
 [libraries]
 # AndroidX Core
@@ -29,6 +36,17 @@ androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" }
 
+# AndroidX DataStore Preferences
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+# Kotlinx Serialization
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
+# Ktor (Client for HTTP requests)
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
+
 [plugins]
 # Core Android & Kotlin
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -36,3 +54,5 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 # Jetpack Compose
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+# Kotlinx Serialization
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
