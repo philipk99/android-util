@@ -3,12 +3,31 @@ package de.klostermeier.androidutil.compose
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
-import androidx.compose.runtime.*
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuDefaults
+import androidx.compose.material3.SegmentedButtonDefaults.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +53,7 @@ fun DropDownSpinner(
     @StringRes defaultText: Int = R.string.drop_down_spinner_default,
     leadingIcon: ImageVector? = null,
     trailingIcon: ImageVector? = null,
-    iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+    iconTint: Color = LocalContentColor.current,
     cornerRadius: Dp = 8.dp
 ) = DropDownSpinner(
     modifier = modifier,
@@ -59,38 +78,52 @@ fun <E> DropDownSpinner(
     itemToString: @Composable E.() -> String = { toString() },
     leadingIcon: ImageVector? = null,
     trailingIcon: ImageVector? = null,
-    iconTint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+    iconTint: Color = LocalContentColor.current,
     cornerRadius: Dp = 8.dp
 ) {
-    var selectedIndex by remember { mutableStateOf(defaultItem) }
+    var selectedIndex by remember { mutableIntStateOf(defaultItem) }
     var isOpen by remember { mutableStateOf(false) }
 
     Box(
         modifier
             .clip(RoundedCornerShape(cornerRadius))
-            .background(MaterialTheme.colors.surface)
+            .background(MaterialTheme.colorScheme.surface)
             .height(48.dp),
         contentAlignment = Alignment.CenterStart
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, bottom = 3.dp)
+                .padding(start = 16.dp, end = 48.dp, bottom = 3.dp)
         ) {
             if (selectedIndex == NO_ITEM_SELECTED) {
                 Text(
                     text = stringResource(id = defaultText),
                     modifier = Modifier.fillMaxWidth(),
-                    color = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             } else {
-                DropDownSpinnerItem(
+                leadingIcon?.let {
+                    Icon(
+                        imageVector = it,
+                        contentDescription = "DropDownSpinner_leadingIcon",
+                        tint = iconTint
+                    )
+                    Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+                }
+                Text(
                     text = items[selectedIndex].itemToString(),
-                    textColor = MaterialTheme.colors.onSurface,
-                    leadingIcon = leadingIcon,
-                    trailingIcon = trailingIcon,
-                    iconTint = iconTint
+                    modifier = Modifier.weight(1f),
+                    color = MaterialTheme.colorScheme.onSurface
                 )
+                trailingIcon?.let {
+                    Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+                    Icon(
+                        imageVector = it,
+                        contentDescription = "DropDownSpinner_trailingIcon",
+                        tint = iconTint
+                    )
+                }
             }
         }
 
@@ -103,18 +136,38 @@ fun <E> DropDownSpinner(
         ) {
             items.forEachIndexed { index, item ->
                 DropdownMenuItem(
+                    text = {
+                        Text(text = item.itemToString())
+                    },
                     onClick = {
                         isOpen = false
                         selectedIndex = index.also(onItemSelected)
-                    }
-                ) {
-                    DropDownSpinnerItem(
-                        text = item.itemToString(),
-                        leadingIcon = leadingIcon,
-                        trailingIcon = trailingIcon,
-                        iconTint = iconTint
+                    },
+                    leadingIcon = {
+                        leadingIcon?.let {
+                            Icon(
+                                imageVector = it,
+                                contentDescription = "DropDownSpinner_leadingIcon",
+                                tint = iconTint,
+                                modifier = Modifier.padding(end = 4.dp)
+                            )
+                        }
+                    },
+                    trailingIcon = {
+                        trailingIcon?.let {
+                            Icon(
+                                imageVector = it,
+                                contentDescription = "DropDownSpinner_trailingIcon",
+                                tint = iconTint,
+                                modifier = Modifier.padding(start = 4.dp)
+                            )
+                        }
+                    },
+                    colors = MenuDefaults.itemColors(
+                        leadingIconColor = iconTint,
+                        trailingIconColor = iconTint
                     )
-                }
+                )
             }
         }
 
@@ -134,40 +187,6 @@ fun <E> DropDownSpinner(
                 .clickable(
                     onClick = { isOpen = true }
                 )
-        )
-    }
-}
-
-@Composable
-private fun DropDownSpinnerItem(
-    text: String,
-    modifier: Modifier = Modifier,
-    textColor: Color = Color.Unspecified,
-    leadingIcon: ImageVector?,
-    trailingIcon: ImageVector?,
-    iconTint: Color
-) {
-    leadingIcon?.let {
-        Icon(
-            imageVector = it,
-            contentDescription = "DropDownSpinner_leadingIcon",
-            tint = iconTint,
-            modifier = Modifier.padding(end = 4.dp)
-        )
-    }
-
-    Text(
-        text = text,
-        modifier = modifier,
-        color = textColor
-    )
-
-    trailingIcon?.let {
-        Icon(
-            imageVector = it,
-            contentDescription = "DropDownSpinner_trailingIcon",
-            tint = iconTint,
-            modifier = Modifier.padding(start = 4.dp)
         )
     }
 }

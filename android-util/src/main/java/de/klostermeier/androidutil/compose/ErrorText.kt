@@ -1,8 +1,8 @@
 package de.klostermeier.androidutil.compose
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
@@ -15,8 +15,8 @@ fun ErrorText(
 ) = error?.let {
     Text(
         text = it,
-        color = MaterialTheme.colors.error,
-        style = MaterialTheme.typography.caption,
+        color = MaterialTheme.colorScheme.error,
+        style = MaterialTheme.typography.bodySmall,
         modifier = Modifier.padding(start = 16.dp)
     )
 }
@@ -27,8 +27,8 @@ fun ErrorText(
 ) = error?.let {
     Text(
         text = it,
-        color = MaterialTheme.colors.error,
-        style = MaterialTheme.typography.caption,
+        color = MaterialTheme.colorScheme.error,
+        style = MaterialTheme.typography.bodySmall,
         modifier = Modifier.padding(start = 16.dp)
     )
 }
@@ -39,8 +39,8 @@ fun ErrorText(
 ) = error?.let {
     Text(
         text = it.asString(),
-        color = MaterialTheme.colors.error,
-        style = MaterialTheme.typography.caption,
+        color = MaterialTheme.colorScheme.error,
+        style = MaterialTheme.typography.bodySmall,
         modifier = Modifier.padding(start = 16.dp)
     )
 }

@@ -1,19 +1,14 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     id("maven-publish")
 }
 
-val composeVersion = rootProject.extra.get("compose_version") as String
-
 android {
     namespace = "de.klostermeier.androidutil"
-    compileSdk = rootProject.extra.get("compile_sdk") as Int
-
-    defaultConfig {
-        minSdk = rootProject.extra.get("min_sdk") as Int
-        targetSdk = rootProject.extra.get("target_sdk") as Int
-    }
 
     buildTypes {
         release {
@@ -25,38 +20,38 @@ android {
         }
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-
     buildFeatures {
         compose = true
     }
+}
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = composeVersion
-    }
-
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 
 dependencies {
-    // Core
-    implementation("androidx.core:core-ktx:1.8.0")
+    // AndroidX Core
+    implementation(libs.androidx.core.ktx)
 
-    // Compose
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
+    // Jetpack Compose
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons)
 }
 
 afterEvaluate {

@@ -1,25 +1,20 @@
-plugins {
-    id("com.android.application")
-    id("kotlin-android")
-}
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-val composeVersion = rootProject.extra.get("compose_version") as String
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+}
 
 android {
     namespace = "de.klostermeier.androidutil.playground"
-    compileSdk = rootProject.extra.get("compile_sdk") as Int
 
     defaultConfig {
         applicationId = "de.klostermeier.android_util"
-        minSdk = rootProject.extra.get("min_sdk") as Int
-        targetSdk = rootProject.extra.get("target_sdk") as Int
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -31,6 +26,11 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+        }
     }
 
     compileOptions {
@@ -38,46 +38,34 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-
     buildFeatures {
         compose = true
     }
+}
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = composeVersion
-    }
-
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 
 dependencies {
     implementation(project(mapOf("path" to ":android-util")))
 
-    implementation("com.google.android.material:material:1.6.1")
+    // AndroidX Core
+    implementation(libs.androidx.core.ktx)
+    // AndroidX Lifecycle
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    // Core
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.activity:activity-compose:1.4.0")
+    // AndroidX Activity
+    implementation(libs.androidx.activity.compose)
 
-    // Lifecycle
-    val lifecycleVersion = "2.5.0-rc01"
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
-
-    // Compose
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
-
-    // Accompanist
-    val accompanistVersion = "0.24.10-beta"
-    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
+    // Jetpack Compose
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons)
 }

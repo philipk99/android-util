@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package de.klostermeier.androidutil.playground
 
 import android.content.Context
@@ -8,14 +10,17 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import de.klostermeier.androidutil.compose.ButtonToggleGroup
 import de.klostermeier.androidutil.compose.DropDownSpinner
 import de.klostermeier.androidutil.compose.ErrorText
 import de.klostermeier.androidutil.compose.util.UiText
@@ -42,22 +47,6 @@ class MainActivity : ComponentActivity() {
                                 UiText.DynamicString("Hello "),
                                 UiText.DynamicString("World"),
                                 UiText.DynamicString("!!!")
-                            )
-
-                            ButtonToggleGroup(
-                                items = previewItems,
-                                onIndexChange = {
-                                    showToast(
-                                        context,
-                                        message = if (it == ButtonToggleGroup.NO_ITEM_SELECTED) {
-                                            "Nothing"
-                                        } else {
-                                            previewItems[it].asString(context)
-                                        }
-                                    )
-                                },
-                                trailingIcon = Icons.Rounded.Star,
-                                iconTint = Color(0xffffd740)
                             )
 
                             DropDownSpinner(
