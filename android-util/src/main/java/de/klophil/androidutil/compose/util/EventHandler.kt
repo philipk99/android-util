@@ -6,16 +6,24 @@ import androidx.compose.runtime.NonRestartableComposable
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 @Composable
 @NonRestartableComposable
-fun <T> EventHandler(events: Flow<T>, block: suspend (T) -> Unit) {
+fun <T> EventHandler(
+    eventFlow: Flow<T>,
+    key1: Any? = null,
+    key2: Any? = null,
+    onEvent: suspend (T) -> Unit
+) {
     val lifecycleOwner = LocalLifecycleOwner.current
-
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(lifecycleOwner, key1, key2) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            events.collect(collector = block)
+            withContext(Dispatchers.Main.immediate) {
+                eventFlow.collect(collector = onEvent)
+            }
         }
     }
 }
